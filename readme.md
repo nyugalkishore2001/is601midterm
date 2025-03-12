@@ -1,5 +1,6 @@
 # Project Install Istructions
-1. Basic Calculator Functionality
+1. Basic Calculator Functionality (Addition)
+2. Basic Calculator Functionality (Addition,Subtraction) and Pylint files
 
 ## Testing
 1. pytest
