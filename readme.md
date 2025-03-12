@@ -1,4 +1,4 @@
-# Project Install Istructions
+# Midterm Project Commits List 
 1. Basic Calculator Functionality (Addition)
 2. Basic Calculator Functionality (Addition,Subtraction) and Pylint files
 
