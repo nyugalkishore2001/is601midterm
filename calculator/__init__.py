@@ -1,4 +1,6 @@
-"Basic Calculator Functionality Addition"
-def add(a1,b1):
-    "returns the value of a+b"
-    return a1+b1
+"Basic Calculator Functionality Addition, Subtraction"
+def add(a,b):
+    return a + b
+
+def subtract(a,b):
+    return a - b
