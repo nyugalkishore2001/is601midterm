@@ -1,33 +1,28 @@
+from calculator.calculatorConstructor import Calculation
+from calculator.calculatorOperation import add, subtract, multiply, divide
+from calculator.calculatorFunctions import Calculations
 from decimal import Decimal
 from typing import Callable
-from calculator.calculatorConstructor import CalcConstructor
-from calculator.calculatorOperation import add, subtract, multiply, divide
 
 class Calculator:
+    @staticmethod
+    def _perform_operation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+        calculation = Calculation.create(a, b, operation)
+        Calculations.add_calculation(calculation)
+        return calculation.perform()
 
     @staticmethod
-    def _perform_calculation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]):
-        calcConstructor = CalcConstructor(a, b, operation)
-        
-        # Import inside the function to avoid circular import
-        from calculator.calculatorFunctions import CalcFunctions  
-        
-        CalcFunctions.add_calculation(calcConstructor)
-        return calcConstructor.perform()
-    
-    @staticmethod
     def add(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_calculation(a, b, add)
-    
+        return Calculator._perform_operation(a, b, add)
+
     @staticmethod
     def subtract(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_calculation(a, b, subtract)
-    
+        return Calculator._perform_operation(a, b, subtract)
+
     @staticmethod
     def multiply(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_calculation(a, b, multiply)
-    
+        return Calculator._perform_operation(a, b, multiply)
+
     @staticmethod
     def divide(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_calculation(a, b, divide)
-    
+        return Calculator._perform_operation(a, b, divide)

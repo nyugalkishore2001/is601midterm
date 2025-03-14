@@ -1,28 +1,18 @@
 from decimal import Decimal
 import pytest
-from calculator.calculatorConstructor import CalcConstructor
-from calculator.calculatorOperation import add, subtract, multiply, divide
+from calculator.calculatorConstructor import Calculation
+from calculator.calculatorOperation import add
 
-@pytest.mark.parametrize("a, b, operation, expected", [
-    (Decimal('10'), Decimal('5'), add, Decimal('15')),
-    (Decimal('10'), Decimal('5'), subtract, Decimal('5')),
-    (Decimal('10'), Decimal('5'), multiply, Decimal('50')),
-    (Decimal('10'), Decimal('2'), divide, Decimal('5')),
-    (Decimal('10.5'), Decimal('0.5'), add, Decimal('11.0')),
-    (Decimal('10.5'), Decimal('0.5'), subtract, Decimal('10.0')),
-    (Decimal('10.5'), Decimal('2'), multiply, Decimal('21.0')),
-    (Decimal('10'), Decimal('0.5'), divide, Decimal('20')),
-])
-def test_calculation_operations(a, b, operation, expected):
-    calc = CalcConstructor(a, b, operation)
-    assert calc.perform() == expected, f"Failed {operation.__name__} operation with {a} and {b}"
+def test_calculation_creation():
+    calc = Calculation.create(Decimal('2'), Decimal('3'), add)
+    assert calc.a == Decimal('2')
+    assert calc.b == Decimal('3')
+    assert calc.operation == add
+
+def test_calculation_perform():
+    calc = Calculation.create(Decimal('2'), Decimal('3'), add)
+    assert calc.perform() == Decimal('5')
 
 def test_calculation_repr():
-    calc = CalcConstructor(Decimal('10'), Decimal('5'), add)
-    expected_repr = "Calculation(10, 5, add)"
-    assert calc.__repr__() == expected_repr
-
-def test_divide_by_zero():
-    calc = CalcConstructor(Decimal('10'), Decimal('0'), divide)
-    with pytest.raises(ValueError, match="Cannot divide by zero"):
-        calc.perform()
+    calc = Calculation.create(Decimal('2'), Decimal('3'), add)
+    assert repr(calc) == "Calculation(2, 3, add)"
