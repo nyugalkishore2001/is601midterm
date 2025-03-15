@@ -1,8 +1,11 @@
 import sys
 from calculator import Calculator
 from decimal import Decimal, InvalidOperation
+import logging
+from calculator.logger import logger  
 
 def compute_and_display(a, b, operation_name):
+    """Perform a calculation and log the results."""
     operation_mappings = {
         'add': Calculator.add,
         'subtract': Calculator.subtract,
@@ -10,24 +13,36 @@ def compute_and_display(a, b, operation_name):
         'divide': Calculator.divide
     }
 
-    # Unified error handling for decimal conversion
     try:
         a_decimal, b_decimal = map(Decimal, [a, b])
-        result = operation_mappings.get(operation_name) # Use get to handle unknown operations
-        if result:
-            print(f"The result of {a} {operation_name} {b} is equal to {result(a_decimal, b_decimal)}")
-        else:
-            print(f"Unknown operation: {operation_name}")
+        operation = operation_mappings.get(operation_name)
+
+        if operation:
+            result = operation(a_decimal, b_decimal)
+            message = f"The result of {a} {operation_name} {b} is equal to {result}"
+            print(message)
+            logger.info(message)  
+            error_message = f"Unknown operation: {operation_name}"
+            print(error_message)
+            logger.error(error_message)  
+
     except InvalidOperation:
-        print(f"Invalid number input: {a} or {b} is not a valid number.")
+        error_message = f"Invalid number input: {a} or {b} is not a valid number."
+        print(error_message)
+        logger.error(error_message)  
     except ZeroDivisionError:
-        print("Error: Division by zero.")
-    except Exception as e: # Catch-all for unexpected errors
-        print(f"An error occurred: {e}")
+        error_message = "Error: Division by zero."
+        print(error_message)
+        logger.error(error_message)  
+    except Exception as e:
+        error_message = f"An error occurred: {e}"
+        print(error_message)
+        logger.exception(error_message)  
 
 def main():
     if len(sys.argv) != 4:
         print("Usage: python calculator_main.py <number1> <number2> <operation>")
+        logger.error("Invalid number of arguments provided.")
         sys.exit(1)
     
     _, a, b, operation = sys.argv

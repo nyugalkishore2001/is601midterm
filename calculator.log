@@ -1,0 +1,8 @@
+2025-03-14 22:40:22,761 - INFO - Executed plugin: addition_plugin(1.0, 2.0) = 3.0
+2025-03-14 22:40:22,776 - INFO - Plugin execution completed successfully.
+2025-03-14 22:41:24,083 - ERROR - Invalid number of arguments provided.
+2025-03-14 22:41:31,664 - INFO - Calculation: 1 add 2 = 3
+2025-03-14 22:41:31,664 - INFO - Operation performed: Calculation(1, 2, add)
+2025-03-14 22:41:31,664 - INFO - The result of 1 add 2 is equal to 3
+2025-03-14 22:41:31,664 - ERROR - Unknown operation: add
+2025-03-14 22:43:50,855 - INFO - Calculation: 2 subtract 1 = 1
