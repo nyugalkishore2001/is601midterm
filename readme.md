@@ -15,5 +15,4 @@
 
 ## Link for Project demonstration
 
-https://drive.google.com/file/d/1NUhvG3UFNenRBAhoTR9HuYQX6Hf9750G/view?usp=drive_link
-
+https://drive.google.com/file/d/1NUhvG3UFNenRBAhoTR9HuYQX6Hf9750G/view?usp=sharing
